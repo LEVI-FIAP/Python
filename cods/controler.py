@@ -15,9 +15,9 @@ def menu ():
         "[2] - Alterar dados\n"
         "[3] - Excluir dados\n"
         "[4] - Consultar dados\n"
-        "[5] - Calcular sua ecônomia com energia solar"
-        "[5] - Exportar para um arquivo JSON\n"
-        "[6] - Finalizar o Programa\n"
+        "[5] - Calcular sua ecônomia com energia solar\n"
+        "[6] - Exportar para um arquivo JSON\n"
+        "[7] - Finalizar o Programa\n"
         "----------------------------------------------------------")
 
     mensagem_menu = "Qual serviço o senhor(a) deseja?\n==> "
@@ -33,7 +33,6 @@ def menu ():
             mensagem_menu = "Por favor digite algum valor correspondente com o Menu\n==> "
     
     return resposta
-
 
 def sub_menu (text = "\n",subtitulo="O que o senhor(a) deseja fazer agora?", op1 = "Voltar para o Menu Principal", op2 ="Finalizar Programa"):
     limpar_terminal()
@@ -57,15 +56,12 @@ def sub_menu (text = "\n",subtitulo="O que o senhor(a) deseja fazer agora?", op1
 
     return resposta
 
-
-
 def verificar_num(text, qtd_min=0, qtd_max=100):
     while True:
         valor = input(text)
         if valor.isdigit() and qtd_min <= len(valor) <= qtd_max:
             return int(valor)
         print(f"\nPreencha com um valor numérico de {qtd_min} a {qtd_max} caracteres.")
-
 
 def verificar_s_n(text):
     msg = text
@@ -83,7 +79,6 @@ def verificar_email(text):
         if re.match(padrao_email, email):
             return email
         msg = "Por favor, digite um email válido\n==> "
-
         
 def pegar_dados():
     db = Repositorio()
@@ -107,15 +102,13 @@ def cadastro_user():
     
     print("\n----------------------------------------------------------\n"
           "                  C A D A S T R O\n\n")
-    cliente, end = pegar_dados()
-    
-    retorno = db.gravar_db(cliente,end)
 
-    
-    if retorno:
-        msg = "\nCadastro foi realizado com sucesso!!!"
-    else:
-        msg = "\nOcorreu um erro ao realizar cadastro no nosso sistema contate o nosso suporte!!!"
+
+    msg = 'testando'
+    # if retorno:
+    #     msg = "\nCadastro foi realizado com sucesso!!!"
+    # else:
+    #     msg = "\nOcorreu um erro ao realizar cadastro no nosso sistema contate o nosso suporte!!!"
 
 
     opcao = sub_menu(msg)
@@ -256,6 +249,17 @@ def consultar_dados():
 
     return repetir
 
+def calcular_energia():
+    
+    opcao = sub_menu("ta sendo calculo ainda")
+
+    if opcao == "1":
+        repetir = True
+    elif opcao == "2":
+        repetir = False
+
+    return repetir
+    
 
 def exportar_dados():
     limpar_terminal()

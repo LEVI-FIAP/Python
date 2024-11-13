@@ -47,6 +47,23 @@ class Repositorio():
             return False
         conexao.close()
         return resultado
+    
+    def ler_db_regiao(self):
+        conexao = self.gerar_conexao_db()
+        cursor = conexao.cursor()
+        sql = """SELECT * FROM regiao"""
+        try:
+            cursor.execute(sql)
+            resultado = []
+            for dados in cursor:
+                resultado.append(dados)
+        except Exception as err:
+            print("Erro: ", err)
+            conexao.rollback()
+            return False
+        conexao.close()
+        return resultado
+        
 
     def ler_db_relatorio(self):
         conexao = self.gerar_conexao_db()

@@ -15,7 +15,7 @@ def menu ():
         "[2] - Alterar dados\n"
         "[3] - Excluir dados\n"
         "[4] - Consultar dados\n"
-        "[5] - Calcular "
+        "[5] - Calcular sua ecônomia com energia solar"
         "[5] - Exportar para um arquivo JSON\n"
         "[6] - Finalizar o Programa\n"
         "----------------------------------------------------------")
@@ -34,8 +34,10 @@ def menu ():
     
     return resposta
 
+
 def sub_menu (text = "\n",subtitulo="O que o senhor(a) deseja fazer agora?", op1 = "Voltar para o Menu Principal", op2 ="Finalizar Programa"):
     limpar_terminal()
+    
     menu = ("-----------------------------------------" + text +
             f"\n{subtitulo}"+
             f"\n\n[1] - {op1}"+
@@ -89,13 +91,14 @@ def pegar_dados():
     nome = input("Digite o seu nome de usuario:\n==> ")
     senha = input("Crie uma senha para seu cadastro:\n==> ")
     
-    
+    tamanho_disp = verificar_num("Quantos metros quadrados (m²) você possui disponivel para instalar os painéis solares")
+    qtnd_painel = int(tamanho_disp / 1.7)
+    print(f'A quantidade de painéis possivel instalar é de {qtnd_painel}')
+    potencia_total = qtnd_painel * 0.33
 
-    id_cliente = len(db.ler_db_cliente()) + 1
-    id_endereco = len(db.ler_db_endereco()) + 1
 
 
-    return 
+    return ""
 
  
 def cadastro_user():
@@ -253,13 +256,6 @@ def consultar_dados():
 
     return repetir
 
-
-def converter_data(obj):
-    
-    if isinstance(obj, datetime):
-        return obj.isoformat()
-
-    raise TypeError("Tipo não serializável")
 
 def exportar_dados():
     limpar_terminal()

@@ -1,4 +1,4 @@
-import re, json, os
+import re, json, os, visual
 from datetime import datetime
 from database import Repositorio
 from models import Usuario, Relatorio, Regiao
@@ -311,3 +311,6 @@ def exportar_dados():
         repetir = False
 
     return repetir
+
+if __name__ == "__main__":
+    visual.view()

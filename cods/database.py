@@ -1,6 +1,6 @@
 import oracledb 
-from models import Usuario, Relatorio, Regiao
-
+from models import Usuario, Relatorio
+import visual
 
 class Repositorio():
     def __init__(self):
@@ -140,3 +140,6 @@ class Repositorio():
         conexao.commit()
         conexao.close()
         return True
+    
+if __name__ == "__main__":
+    visual.view()

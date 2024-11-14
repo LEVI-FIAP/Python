@@ -1,4 +1,4 @@
-import re, requests, json, os
+import re, json, os
 from datetime import datetime
 from database import Repositorio
 from models import Usuario, Relatorio, Regiao

@@ -1,4 +1,4 @@
-import oracledb
+import oracledb 
 from models import Usuario, Relatorio, Regiao
 
 
@@ -90,13 +90,15 @@ class Repositorio():
         try:
             resultado = []
             cursor.execute(sql_user, (id_procurado_usuario,))            
-            for dados in cursor:
-                resultado.append(dados)
-            id_procurado_relatorio =  cursor[0][-1]
+            dados_users = cursor.fetchall()
+            resultado.extend(dados_users)
+            
+            if dados_users:
+                id_procurado_relatorio = dados_users[-1][0]
                 
             cursor.execute(sql_rel, (id_procurado_relatorio,))
-            for dados in cursor:
-                resultado.append(dados)
+            dados_relatorio = cursor.fetchall()
+            resultado.extend(dados_relatorio)
         except Exception as err:
             print("Erro: ", err)
             conexao.rollback()
@@ -122,27 +124,14 @@ class Repositorio():
         conexao.close()
         return True
     
-    def deletar_end(self, id):
+    def deletar(self, id_alvo):
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
-        sql = """DELETE FROM endereco WHERE id_cliente = :1"""
+        sql_user = """DELETE FROM usuario WHERE id_usu = :1"""
+        sql_rel = """DELETE FROM relatorio WHERE id_usu = :1"""
         try:
-            cursor.execute(sql, (id,))
-        except Exception as err:
-            print("Erro: ", err)
-            conexao.rollback()
-            return False
-        conexao.commit()
-        conexao.close()
-        return True
-    
-    def deletar_db(self, id_alvo):
-        conexao = self.gerar_conexao_db()
-        cursor = conexao.cursor()
-        sql = """DELETE FROM cliente WHERE id_cliente = :1"""
-        self.deletar_end(id_alvo)
-        try:
-            cursor.execute(sql, (id_alvo,))
+            cursor.execute(sql_rel, (id_alvo,))
+            cursor.execute(sql_user, (id_alvo,))
         except Exception as err:
             print("Erro: ", err)
             conexao.rollback()

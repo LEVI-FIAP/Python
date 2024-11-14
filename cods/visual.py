@@ -3,9 +3,9 @@ from models import Usuario, Relatorio, Regiao
 
 db = Repositorio()
 
-teste_user = Usuario(666, "luizGay@gmail.com", "I ghost to the down o cool", "vicenzinho")
-teste_rel = Relatorio(69, 666, 200, 69, 69, 69,69,69,69,666,2)
-resultado = db.gravar_db(teste_user, teste_rel)
+teste_user = Usuario(666, "luizGay@gmail.com", "Subi no pé de pera", "LuanGameplay")
+teste_rel = Relatorio(69, 333, 333, 33, 33, 33,33,33,33,666,5)
+resultado = db.update_db(teste_user, teste_rel, 666,69)
 print(resultado)
 # import controler
 

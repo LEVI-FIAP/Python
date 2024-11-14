@@ -107,16 +107,16 @@ class Repositorio():
         conexao.close()
         return resultado
 
-    def update_db (self, usuario : Usuario , relatorio : Relatorio, id_clie : int):
+    def update_db (self, usuario : Usuario , relatorio : Relatorio, id_user : int, id_rel :int):
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
-        sql_user = """UPDATE usuario SET email_usu = :1, senha_usu = :2, consumo_men = :3, area_desejada = :4, nome_usu = :5, Regiao_id_reg = :6 WHERE id_cliente = :7"""
-        sql_end = """UPDATE relatorio SET qtnd_pain = :1, potencial_total =:2, custo_total =:3 , economia_mensal =:4, payback = :5, energia_mes = :6  WHERE id_cliente = :7"""
+        sql_user = """UPDATE usuario SET nome_usuario = :1, email = :2, senha = :3 WHERE id_usu = :4"""
+        sql_end = """UPDATE relatorio SET consumo_mensal = :1, conta_luz = :2, area_desejada = :3, qtd_paineis = :4, potencia_total = :5, custo_instal = :6, economia_mensal = :7, payback = :8,id_reg =:9   WHERE id_relatorio = :10"""
         try:
-            cursor.execute(sql_user, (usuario.id_user, usuario.email_user, usuario.senha_user, usuario.consumo_men, usuario.area_desejada, usuario.nome_usuario, usuario.regiao_fk))
+            cursor.execute(sql_user, (usuario.nome_usuario, usuario.email_user, usuario.senha_user, id_user))
             conexao.commit()
-            # Fazer o negocio para procurar o id
-            cursor.execute(sql_end, (relatorio.qtnd_painel, relatorio.potencia_total, relatorio.custo_total, relatorio.economia_mensal, relatorio.payback, relatorio.energia_mes, relatorio.id_relatorio))
+            
+            cursor.execute(sql_end, (relatorio.consumo_mensal, relatorio.conta_luz, relatorio.area_desejada, relatorio.qtd_paineis, relatorio.potencia_total, relatorio.custo_instal, relatorio.economia_mensal, relatorio.payback, relatorio.id_reg, id_rel))
             conexao.commit()
         except Exception as err:
             print("Erro: ", err)

@@ -18,12 +18,9 @@ def view():
             repetir = controler.consultar_dados()
 
         elif opcoes == "5":
-            repetir = controler.calcular_energia()
-
-        elif opcoes == "6":
             repetir = controler.exportar_dados()
 
-        else:
+        elif opcoes == "6":
             print("Programa finalizado")
             break;
         

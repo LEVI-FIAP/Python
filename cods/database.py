@@ -18,12 +18,13 @@ class Repositorio():
     def gravar_db(self, usuario : Usuario , relatorio : Relatorio) -> bool:
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
-        sql_usu = """INSERT INTO usuario (id_usu, email_usu, senha_usu, consumo_men, area_desejada, nome_usu, Regiao_id_reg, Relatorio_id_relatorio) VALUES (:1, :2, :3, :4, :5, :6, :7, :8)"""
-        sql_rel = """INSERT INTO relatorio (id_relatorio, qtnd_pain, potencia_total, custo_total, economia_mensal, payback, energia_mes) VALUES (:1, :2, :3, :4, :5, :6, :7)"""
+        sql_usu = """INSERT INTO usuario (id_usu, email, senha, NOME_USUARIO) VALUES (:1, :2, :3, :4)"""
+        
+        sql_rel = """INSERT INTO RELATORIO(ID_RELATORIO,CONSUMO_MENSAL,CONTA_LUZ,AREA_DESEJADA,QTD_PAINEIS,POTENCIA_TOTAL,CUSTO_INSTAL,ECONOMIA_MENSAL,PAYBACK,ID_USU,ID_REG) VALUES (:1,:2,:3,:4,:5,:6,:7,:8,:9,:10, :11)"""
         try:
-            cursor.execute(sql_usu, (usuario.id_user, usuario.email_user, usuario.senha_user, usuario.consumo_men, usuario.area_desejada, usuario.nome_usuario, usuario.regiao_fk, usuario.relatorio_fk))
+            cursor.execute(sql_usu, (usuario.id_user, usuario.email_user, usuario.senha_user, usuario.nome_usuario))
 
-            cursor.execute(sql_rel, (relatorio.id_relatorio, relatorio.qtnd_painel, relatorio.potencia_total,relatorio.custo_total, relatorio.economia_mensal, relatorio.payback, relatorio.energia_mes))
+            cursor.execute(sql_rel, (relatorio.id_relatorio, relatorio.consumo_mensal,relatorio.conta_luz, relatorio.area_desejada, relatorio.qtd_paineis, relatorio.potencia_total, relatorio.custo_instal, relatorio.economia_mensal, relatorio.payback, relatorio.id_usu, relatorio.id_reg))
             conexao.commit()
         except Exception as err:
             print("Erro: ", err)

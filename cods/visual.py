@@ -1,8 +1,11 @@
 from database import Repositorio
+from models import Usuario, Relatorio, Regiao
 
 db = Repositorio()
 
-resultado = db.deletar_user(1)
+teste_user = Usuario(666, "luizGay@gmail.com", "I ghost to the down o cool", "vicenzinho")
+teste_rel = Relatorio(69, 666, 200, 69, 69, 69,69,69,69,666,2)
+resultado = db.gravar_db(teste_user, teste_rel)
 print(resultado)
 # import controler
 

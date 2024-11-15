@@ -95,7 +95,7 @@ class Repositorio():
         return resultado
 
     
-    def procurar_db(self, id_procurado_usuario ):
+    def procurar_db(self, id_procurado_usuario ) -> bool:
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
         sql_user = """SELECT * FROM usuario WHERE id_usu LIKE :1"""
@@ -145,13 +145,27 @@ class Repositorio():
         conexao.close()
         return True
     
-    def deletar(self, id_alvo, id_relatorio):
+    def deletar_usuario(self, id_user) -> bool:
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
+        sql_rel = """DELETE FROM relatorio WHERE id_usu = :1"""
         sql_user = """DELETE FROM usuario WHERE id_usu = :1"""
+        try:
+            cursor.execute(sql_rel, (id_user,))
+            cursor.execute(sql_user,(id_user,))                   
+        except Exception as err:
+            print("Erro: ", err)
+            conexao.rollback()
+            return False
+        conexao.commit()
+        conexao.close()
+        return True
+
+    def deletar_relatorio(self, id_relatorio) -> bool:
+        conexao = self.gerar_conexao_db()
+        cursor = conexao.cursor()
         sql_rel = """DELETE FROM relatorio WHERE id_relatorio = :1"""
         try:
-            cursor.execute(sql_user,(id_alvo,))                   
             cursor.execute(sql_rel, (id_relatorio,))
         except Exception as err:
             print("Erro: ", err)

@@ -201,6 +201,7 @@ def cadastro():
             return False
 
 
+
 def alterar_dados():
     db = Repositorio()
     
@@ -216,6 +217,8 @@ def alterar_dados():
             id_rel_alvo = verificar_num("Qual o id do relatorio que você deseja alterar os dados\n==> ")
             dados_novo_rel = pegar_dados_relatorio()
             resultado = db.update_relatorio(dados_novo_rel, id_rel_alvo)
+        elif op_update == 3:
+            return True
 
 
         if resultado:
@@ -235,38 +238,43 @@ def alterar_dados():
 
 
 def excluir_dados():
-    limpar_terminal()
-    print("\n----------------------------------------------------------\n"
-          "                  E X C L U I N D O   D A D O S\n\n")
-    
     db = Repositorio()
     
-    id_usuario = verificar_num("Qual id do usuario que você quer deletar os dados\n==> ")
-    id_relatorio = verificar_num("Qual id do relatorio que você quer deletar os dados\n==> ")
-          
-    resultado = db.deletar_db(id_usuario,id_relatorio)
-    
-    if resultado:
-        msg = "\nDados excluidos com sucesso!!!"
-    else:
-        msg = "\nErro ao deletar contate nosso suporte!!!"
-        
-    opcao = sub_menu(msg)
+    while True:
+        op_delete = sub_menu("\nDELETAR","Quais dados você quer deleter?", "Dados de Usuario e Relatorios", "Apenas de um relatorio", "Voltar ao menu")
 
-    if opcao == 1:
-        repetir = True
-    elif opcao == 2:
-        repetir = False
+        if op_delete == 1:
+            id_usuario = verificar_num("Qual id do usuario que você quer deletar os dados\n==> ")
+            resultado = db.deletar_usuario(id_usuario)
+            
+        elif op_delete == 2:
+            id_relatorio = verificar_num("Qual id do relatorio que você quer deletar os dados\n==> ")
+            resultado = db.deletar_relatorio(id_relatorio)
+            
+        elif op_delete == 3:
+            return True
 
-    return repetir
 
+
+        if resultado:
+            msg = "\nDados excluidos com sucesso!!!"
+        else:
+            msg = "\nErro ao deletar contate nosso suporte!!!"
+
+        opcao = sub_menu(msg,"O que o senhor(a) deseja fazer agora?","Realizar outro Delete", "Voltar ao Menu", "Finalizar Programa")
+
+        if opcao == 1:
+            print("Realizando Outro Delete")
+        if opcao == 2:
+            return True
+        elif opcao == 3:
+            return False
 
 
 def consultar_dados():
-    limpar_terminal()
     db = Repositorio()
     
-    op_consulta = sub_menu("\nConsulta de Dados", "Deseja fazer uma consulta expecifica ou geral", "Expecifica", "Geral")
+    op_consulta = sub_menu("\nCONSULTA DADOS", "O que o senhor deseja fazer?", "Consultar dados de um usuario expecifico", "Consultar dados Gerais", "Voltar ao Menu")
     if op_consulta == 1:
         procurado = verificar_num("\nQual o id de quem você deseja procurar?")
         
@@ -300,7 +308,7 @@ def consultar_dados():
             print(relatorio, "\n--------------------------")
         msg = "\nConsulta realizada com sucesso!!!"
     elif op_consulta == 2:
-        resultado = sub_menu("\nConsulta de dados","Quais tipos dados deseja consultar?", "Dados de usuarios", "Dados de relatorios")
+        resultado = sub_menu("\nConsulta de dados","Quais tipos dados deseja consultar?", "Dados de usuarios", "Dados de relatorios", "Todos os dados")
 
         if resultado == 1:    
             clientes = db.ler_db_usuario()
@@ -314,7 +322,7 @@ def consultar_dados():
                 ser_vivo = Usuario(id,email,senha,nome)
                 print(ser_vivo, "\n--------------------------")
                 msg = "\nConsulta realizada com sucesso!!!"
-        else:
+        elif resultado == 2:
             dados = db.ler_db_relatorio()
             for rel in dados:
                 id = rel[0]
@@ -333,6 +341,37 @@ def consultar_dados():
                 relatorio = Relatorio(id,consumo,conta,area,paineis,potencia,custo,economia,payback,energia,id_usu,id_reg)
                 print(relatorio, "\n--------------------------")
                 msg = "\nConsulta realizada com sucesso!!!"
+        elif resultado == 3:
+            clientes = db.ler_db_usuario()
+            for pessoa in clientes:
+
+                id = pessoa[0]
+                nome = pessoa[1]
+                email = pessoa[2]
+                senha = pessoa[3]
+
+                ser_vivo = Usuario(id,email,senha,nome)
+                print(ser_vivo, "\n--------------------------")
+            dados = db.ler_db_relatorio()
+            for rel in dados:
+                id = rel[0]
+                consumo = rel[1]
+                conta = rel[2]
+                area = rel[3]
+                paineis = rel[4]
+                potencia = rel[5]
+                custo = rel[6]
+                economia = rel[7]
+                payback = rel[8]
+                energia = rel[9]
+                id_usu = rel[10]
+                id_reg = rel[11]
+
+                relatorio = Relatorio(id,consumo,conta,area,paineis,potencia,custo,economia,payback,energia,id_usu,id_reg)
+                print(relatorio, "\n--------------------------")
+            msg = "\nConsulta realizada com sucesso!!!"
+    elif op_consulta == 3:
+        return True
     else:
         msg = "Erro ao realizar a consulta de dados contato o suporte!!!"
     input("Aperte ENTER para continuar")

@@ -2,8 +2,11 @@ import re, json, os, visual
 from database import Repositorio
 from models import Usuario, Relatorio, Regiao
 
+
 def limpar_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
 
 def menu ():
     limpar_terminal()
@@ -33,6 +36,8 @@ def menu ():
     
     return resposta
 
+
+
 def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opcoes):
     limpar_terminal()
     if not opcoes:
@@ -60,12 +65,16 @@ def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opco
 
     return resposta
 
+
+
 def verificar_num(text, qtd_min=0, qtd_max=100):
     while True:
         valor = input(text)
         if valor.isdigit() and qtd_min <= len(valor) <= qtd_max:
             return int(valor)
         print(f"\nPreencha com um valor numérico de {qtd_min} a {qtd_max} caracteres.")
+
+
 
 def verificar_s_n(text):
     msg = text
@@ -75,6 +84,8 @@ def verificar_s_n(text):
             return escolha
         msg = "Por favor, digite um valor válido (S/N)\n==> "
 
+
+
 def verificar_email(text):
     padrao_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     msg = text
@@ -83,8 +94,10 @@ def verificar_email(text):
         if re.match(padrao_email, email):
             return email
         msg = "Por favor, digite um email válido\n==> "
+
+
         
-def pegar_dados():
+def pegar_dados_usuario():
     db = Repositorio()
     
     id_user = len(db.ler_db_usuario()) + 1
@@ -92,7 +105,16 @@ def pegar_dados():
     nome = input("Digite o seu nome de usuario:\n==> ")
     senha = input("Crie uma senha para seu cadastro:\n==> ")
     
+    user = Usuario(id_user, email, senha, nome)
+        
+    return user
+
+
+
+def pegar_dados_relatorio():
+    db = Repositorio()
     id_relatorio = len(db.ler_db_relatorio()) + 1
+    id_user = input("Qual o id do usuario desse relatorio?\n==> ")
     tamanho_disp = verificar_num("Quantos metros quadrados (m²) você possui disponivel para instalar os painéis solares?\n==> ")
     consumo_mensal = verificar_num("Quanto de energia você consome no mês?\n==> ")
     conta_luz = verificar_num("Qual o valor da sua conta de luz normalmente?\n==> ")
@@ -108,12 +130,12 @@ def pegar_dados():
     qtnd_painel = int(tamanho_disp / 1.7)
     print(f'A quantidade de painéis possivel instalar é de {qtnd_painel}')
     
-    potencia_total = qtnd_painel * 0.33
+    potencia_total = int(qtnd_painel * 0.33)
     
-    estimativa = potencia_total * 30 * regiao_escolhida.taxa_irradiacao
-    custo_total = potencia_total * 5250
-    economia_mensal = potencia_total * 425
-    payback = custo_total / economia_mensal
+    estimativa = int(potencia_total * 30 * regiao_escolhida.taxa_irradiacao)
+    custo_total = int(potencia_total * 5250)
+    economia_mensal = int(potencia_total * 425)
+    payback = int(custo_total / economia_mensal)
     
     print(f'O custo total da instalação dos paineís será por volta de R${custo_total} e você tera um payback em {payback} mêses')
     
@@ -121,46 +143,73 @@ def pegar_dados():
         print("Caso instale o sistema de paínel solar cobrira totalmente o seu consumo de energia")
     else:
         print("Caso instale o sistema de paínel solar não ira cobrir o seu consumo de energia")
-    
-    user = Usuario(id_user, email, senha, nome)
-    
+        
     relatorio = Relatorio(id_relatorio,consumo_mensal,conta_luz,tamanho_disp, qtnd_painel,potencia_total,custo_total,economia_mensal,payback,estimativa,id_user,regiao_escolhida.id_regiao)
-    
-    return user, relatorio
- 
-def cadastro_user():
-    limpar_terminal()
+        
+    return relatorio
+
+
+
+def cadastro():
     db = Repositorio()
+    repetir_cadastro = True
     
-    print("\n----------------------------------------------------------\n"+ "                  C A D A S T R O\n\n")
-    user, rel = pegar_dados()
-    
-    retorno = db.gravar_db(user, rel)
+    while repetir_cadastro:
+        op_cadastro = sub_menu("\nCADASTRO","Qual tipo de cadastro você deseja fazer?", "Cadastro de Usuario", "Cadastro de Relatorio", "Ambos", "Voltar ao menu")
 
-    if retorno:
-        msg = "\nCadastro foi realizado com sucesso!!!"
-    else:
-        msg = "\nOcorreu um erro ao realizar cadastro no nosso sistema contate o nosso suporte!!!"
+        if op_cadastro == 1:
+            usuario = pegar_dados_usuario()
+            print(f'O seu ID de Usúario é ({usuario.id_user})')
+            retorno = db.gravar_user(usuario)
+
+        elif op_cadastro == 2:
+            relatorio = pegar_dados_relatorio()
+            print(f'O ID desse relatorio é ({relatorio.id_relatorio})')
+            retorno = db.gravar_relatorio(relatorio)
+
+        elif op_cadastro == 3:
+            user = pegar_dados_usuario()
+            print(f'O seu ID de Usúario é ({user.id_user})')
+            retorno_user = db.gravar_user(user)
+            rel = pegar_dados_relatorio()
+            print(f'O ID desse relatorio é ({rel.id_relatorio})')
+            retorno_rel = db.gravar_relatorio(rel)
+
+            if retorno_user == False or retorno_rel == False:
+                retorno = False
+            else:
+                retorno = True
+
+        elif op_cadastro == 4:
+            return True
+
+        input("Aperte ENTER para continuar")
 
 
-    opcao = sub_menu(msg)
+        if retorno:
+            msg = "\nCadastro foi realizado com sucesso!!!"
+        else:
+            msg = "\nOcorreu um erro ao realizar cadastro no nosso sistema contate o nosso suporte!!!"
 
-    if opcao == 1:
-        repetir = True
-    elif opcao == 2:
-        repetir = False
 
-    return repetir
+        opcao = sub_menu(msg,"O que o senhor(a) deseja fazer agora?","Realizar Outro Cadastro", "Voltar ao Menu", "Finalizar Programa")
+
+        if opcao == 1:
+            print("Realizando outro cadastro")
+        elif opcao == 2:
+            return True
+        elif opcao == 3:
+            return False
+
 
 def alterar_dados():
-    limpar_terminal()
-    print("\n----------------------------------------------------------\n             A T U A L I Z A N D O   D A D O S\n\n")
+    
+    op_cadastro = sub_menu("\ATUALIZAR","Quais dados você quer atualizar?", "Dados de Usuario", "Dados de Relatorio", "Voltar ao menu")
     
     db = Repositorio()
     id_user_alvo = verificar_num("Qual o id do usuario que você deseja alterar os dados\n==> ")
     id_rel_alvo = verificar_num("Qual o id do relatorio que você deseja alterar os dados\n==> ")
 
-    novo_user, novo_relatorio = pegar_dados()
     
     resultado = db.update_db(novo_user, novo_relatorio, id_user_alvo, id_rel_alvo)
 
@@ -178,6 +227,8 @@ def alterar_dados():
         repetir = False
 
     return repetir
+
+
 
 def excluir_dados():
     limpar_terminal()
@@ -205,6 +256,8 @@ def excluir_dados():
 
     return repetir
 
+
+
 def consultar_dados():
     limpar_terminal()
     db = Repositorio()
@@ -214,8 +267,33 @@ def consultar_dados():
         procurado = verificar_num("\nQual o id de quem você deseja procurar?")
         
         dados_ser_vivo = db.procurar_db(procurado)
-        for dados in dados_ser_vivo:
-            print(dados)
+        
+        dado_pessoa = dados_ser_vivo.pop(0)
+
+        print("-----DADOS-USUARIO-----")
+        id = dado_pessoa[0]
+        nome = dado_pessoa[1]
+        email = dado_pessoa[2]
+        senha = dado_pessoa[3]
+        ser_vivo = Usuario(id,email,senha,nome)
+        print(ser_vivo)
+
+        print("-----RELATORIOS-----")
+        for dados_rel in dados_ser_vivo:
+            id = dados_rel[0]
+            consumo = dados_rel[1]
+            conta = dados_rel[2]
+            area = dados_rel[3]
+            paineis = dados_rel[4]
+            potencia = dados_rel[5]
+            custo = dados_rel[6]
+            economia = dados_rel[7]
+            payback = dados_rel[8]
+            energia = dados_rel[9]
+            id_usu = dados_rel[10]
+            id_reg = dados_rel[11]
+            relatorio = Relatorio(id,consumo,conta,area,paineis,potencia,custo,economia,payback,energia,id_usu,id_reg)
+            print(relatorio, "\n--------------------------")
         msg = "\nConsulta realizada com sucesso!!!"
     elif op_consulta == 2:
         resultado = sub_menu("\nConsulta de dados","Quais tipos dados deseja consultar?", "Dados de usuarios", "Dados de relatorios")
@@ -263,6 +341,8 @@ def consultar_dados():
 
     return repetir   
 
+
+
 def exportar_dados():
     limpar_terminal()
     db = Repositorio()
@@ -309,6 +389,8 @@ def exportar_dados():
         repetir = False
 
     return repetir
+
+
 
 if __name__ == "__main__":
     visual.view()

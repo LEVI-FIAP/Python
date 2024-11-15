@@ -6,7 +6,7 @@ def view():
         opcoes = controler.menu()
 
         if opcoes == "1":
-            repetir = controler.cadastro_user()
+            repetir = controler.cadastro()
 
         elif opcoes == "2":
             repetir = controler.alterar_dados()
@@ -21,8 +21,8 @@ def view():
             repetir = controler.exportar_dados()
 
         elif opcoes == "6":
-            print("Programa finalizado")
             break;
+    print("Programa finalizado")
         
 if __name__ == "__main__":
     view()

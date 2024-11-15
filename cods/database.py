@@ -116,16 +116,27 @@ class Repositorio():
         conexao.close()
         return resultado
 
-    def update_db (self, usuario : Usuario , relatorio : Relatorio, id_user : int, id_rel :int):
+
+    def update_user(self, usuario : Usuario, id_user : int) -> bool:
         conexao = self.gerar_conexao_db()
         cursor = conexao.cursor()
         sql_user = """UPDATE usuario SET nome_usuario = :1, email = :2, senha = :3 WHERE id_usu = :4"""
-        sql_rel = """UPDATE relatorio SET consumo_mensal = :1, conta_luz = :2, area_desejada = :3, qtd_paineis = :4, potencia_total = :5, custo_instal = :6, economia_mensal = :7, payback = :8,energia_mes = :9, id_reg =:10   WHERE id_relatorio = :11"""
         try:
             cursor.execute(sql_user, (usuario.nome_usuario, usuario.email_user, usuario.senha_user, id_user))
             conexao.commit()
-            
-            cursor.execute(sql_rel, (relatorio.consumo_mensal, relatorio.conta_luz, relatorio.area_desejada, relatorio.qtd_paineis, relatorio.potencia_total, relatorio.custo_instal, relatorio.economia_mensal, relatorio.payback,relatorio.estimativa_energia, relatorio.id_reg, id_rel))
+        except Exception as err:
+            print("Erro: ", err)
+            conexao.rollback()
+            return False
+        conexao.close()
+        return True
+    
+    def update_relatorio(self, relatorio : Relatorio, id_relatorio : int) -> bool:
+        conexao = self.gerar_conexao_db()
+        cursor = conexao.cursor()
+        sql_rel = """UPDATE relatorio SET consumo_mensal = :1, conta_luz = :2, area_desejada = :3, qtd_paineis = :4, potencia_total = :5, custo_instal = :6, economia_mensal = :7, payback = :8,energia_mes = :9, id_reg =:10   WHERE id_relatorio = :11"""
+        try:
+            cursor.execute(sql_rel, (relatorio.consumo_mensal, relatorio.conta_luz, relatorio.area_desejada, relatorio.qtd_paineis, relatorio.potencia_total, relatorio.custo_instal, relatorio.economia_mensal, relatorio.payback,relatorio.estimativa_energia, relatorio.id_reg, id_relatorio))
             conexao.commit()
         except Exception as err:
             print("Erro: ", err)

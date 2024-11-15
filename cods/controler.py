@@ -152,9 +152,8 @@ def pegar_dados_relatorio():
 
 def cadastro():
     db = Repositorio()
-    repetir_cadastro = True
     
-    while repetir_cadastro:
+    while True:
         op_cadastro = sub_menu("\nCADASTRO","Qual tipo de cadastro você deseja fazer?", "Cadastro de Usuario", "Cadastro de Relatorio", "Ambos", "Voltar ao menu")
 
         if op_cadastro == 1:
@@ -203,31 +202,36 @@ def cadastro():
 
 
 def alterar_dados():
-    
-    op_cadastro = sub_menu("\ATUALIZAR","Quais dados você quer atualizar?", "Dados de Usuario", "Dados de Relatorio", "Voltar ao menu")
-    
     db = Repositorio()
-    id_user_alvo = verificar_num("Qual o id do usuario que você deseja alterar os dados\n==> ")
-    id_rel_alvo = verificar_num("Qual o id do relatorio que você deseja alterar os dados\n==> ")
-
     
-    resultado = db.update_db(novo_user, novo_relatorio, id_user_alvo, id_rel_alvo)
+    while True:
+        op_update = sub_menu("\nATUALIZAR","Quais dados você quer atualizar?", "Dados de Usuario", "Dados de Relatorio", "Voltar ao menu")
 
-    if resultado:
-        msg = "\nDados alterados com sucesso!!!"
-    else:
-        msg = "\nErro ao alterar dados contate o nosso suporte"
-    
-    
-    opcao = sub_menu(msg)
+        if op_update == 1:
+            id_user_alvo = verificar_num("Qual o id do usuario que você deseja alterar os dados\n==> ")
+            dados_novo_user = pegar_dados_usuario()
+            resultado = db.update_user(dados_novo_user, id_user_alvo)
 
-    if opcao == 1:
-        repetir = True
-    elif opcao == 2:
-        repetir = False
+        elif op_update == 2:
+            id_rel_alvo = verificar_num("Qual o id do relatorio que você deseja alterar os dados\n==> ")
+            dados_novo_rel = pegar_dados_relatorio()
+            resultado = db.update_relatorio(dados_novo_rel, id_rel_alvo)
 
-    return repetir
 
+        if resultado:
+            msg = "\nDados alterados com sucesso!!!"
+        else:
+            msg = "\nErro ao alterar dados contate o nosso suporte"
+
+
+        opcao = sub_menu(msg,"O que o senhor(a) deseja fazer agora?","Realizar outro Update", "Voltar ao Menu", "Finalizar Programa")
+
+        if opcao == 1:
+            print("Atualizando outro dado")
+        if opcao == 2:
+            return True
+        elif opcao == 3:
+            return False
 
 
 def excluir_dados():

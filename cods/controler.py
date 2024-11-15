@@ -8,7 +8,7 @@ def limpar_terminal():
 
 
 
-def menu ():
+def menu () -> int:
     limpar_terminal()
     menu = ("\n----------------------------------------------------------\n"
         "                  B E M   V I N D O\n\n"
@@ -27,9 +27,9 @@ def menu ():
     resposta_invalida = True
     while resposta_invalida == True:
         print(menu)
-        resposta = input(mensagem_menu)
+        resposta = verificar_num(mensagem_menu)
 
-        if resposta.isdigit() and 1 <= int(resposta) <= 7:
+        if 1 <= resposta <= 7:
             resposta_invalida = False
         else:
             mensagem_menu = "Por favor digite algum valor correspondente com o Menu\n==> "
@@ -38,7 +38,7 @@ def menu ():
 
 
 
-def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opcoes):
+def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opcoes) -> int:
     limpar_terminal()
     if not opcoes:
         opcoes = ("Voltar ao Menu", "Finalizar programa")
@@ -58,7 +58,7 @@ def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opco
         print(menu)
         resposta = verificar_num(mensagem)
 
-        if 1 <= int(resposta) <= len(opcoes):
+        if 1 <= resposta <= len(opcoes):
             resposta_invalida = False
         else:
             mensagem = "Por favor, digite algum valor correspondente ao Menu\n==> "
@@ -67,7 +67,7 @@ def sub_menu(text="\n", subtitulo="O que o senhor(a) deseja fazer agora?", *opco
 
 
 
-def verificar_num(text, qtd_min=0, qtd_max=100):
+def verificar_num(text, qtd_min=0, qtd_max=100) -> int:
     while True:
         valor = input(text)
         if valor.isdigit() and qtd_min <= len(valor) <= qtd_max:
@@ -76,7 +76,7 @@ def verificar_num(text, qtd_min=0, qtd_max=100):
 
 
 
-def verificar_s_n(text):
+def verificar_s_n(text) -> str:
     msg = text
     while True:
         escolha = input(msg).upper()[0]
@@ -86,7 +86,7 @@ def verificar_s_n(text):
 
 
 
-def verificar_email(text):
+def verificar_email(text) -> str:
     padrao_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     msg = text
     while True:
@@ -97,7 +97,7 @@ def verificar_email(text):
 
 
         
-def pegar_dados_usuario():
+def pegar_dados_usuario() -> Usuario:
     db = Repositorio()
     
     id_user = len(db.ler_db_usuario()) + 1
@@ -111,7 +111,7 @@ def pegar_dados_usuario():
 
 
 
-def pegar_dados_relatorio():
+def pegar_dados_relatorio() -> Relatorio:
     db = Repositorio()
     id_relatorio = len(db.ler_db_relatorio()) + 1
     id_user = input("Qual o id do usuario desse relatorio?\n==> ")
@@ -150,7 +150,7 @@ def pegar_dados_relatorio():
 
 
 
-def cadastro():
+def cadastro() -> bool:
     db = Repositorio()
     
     while True:
@@ -202,7 +202,7 @@ def cadastro():
 
 
 
-def alterar_dados():
+def alterar_dados() -> bool:
     db = Repositorio()
     
     while True:
@@ -237,7 +237,7 @@ def alterar_dados():
             return False
 
 
-def excluir_dados():
+def excluir_dados() -> bool:
     db = Repositorio()
     
     while True:
@@ -271,7 +271,7 @@ def excluir_dados():
             return False
 
 
-def consultar_dados():
+def consultar_dados() -> bool:
     db = Repositorio()
     
     op_consulta = sub_menu("\nCONSULTA DADOS", "O que o senhor deseja fazer?", "Consultar dados de um usuario expecifico", "Consultar dados Gerais", "Voltar ao Menu")
@@ -386,7 +386,7 @@ def consultar_dados():
 
 
 
-def exportar_dados():
+def exportar_dados() -> bool:
     limpar_terminal()
     db = Repositorio()
     

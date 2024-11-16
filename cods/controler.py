@@ -17,9 +17,8 @@ def menu () -> int:
         "[2] - Alterar dados\n"
         "[3] - Excluir dados\n"
         "[4] - Consultar dados\n"
-        "[5] - Calcular sua ecônomia com energia solar\n"
-        "[6] - Exportar para um arquivo JSON\n"
-        "[7] - Finalizar o Programa\n"
+        "[5] - Exportar para um arquivo JSON\n"
+        "[6] - Finalizar o Programa\n"
         "----------------------------------------------------------")
 
     mensagem_menu = "Qual serviço o senhor(a) deseja?\n==> "
@@ -29,7 +28,7 @@ def menu () -> int:
         print(menu)
         resposta = verificar_num(mensagem_menu)
 
-        if 1 <= resposta <= 7:
+        if 1 <= resposta <= 6:
             resposta_invalida = False
         else:
             mensagem_menu = "Por favor digite algum valor correspondente com o Menu\n==> "

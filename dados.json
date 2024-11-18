@@ -1,0 +1,365 @@
+[
+    {
+        "id_user": 1,
+        "nome_usuario": "Jo\u00e3o Silva",
+        "email": "joao.silva@email.com",
+        "senha": "senha123"
+    },
+    {
+        "id_user": 2,
+        "nome_usuario": "Maria Oliveira",
+        "email": "maria.oliveira@email.com",
+        "senha": "senha456"
+    },
+    {
+        "id_user": 3,
+        "nome_usuario": "Carlos Souza",
+        "email": "carlos.souza@email.com",
+        "senha": "senha789"
+    },
+    {
+        "id_user": 4,
+        "nome_usuario": "Fernanda Costa",
+        "email": "fernanda.costa@email.com",
+        "senha": "senha321"
+    },
+    {
+        "id_user": 5,
+        "nome_usuario": "Roberto Lima",
+        "email": "roberto.lima@email.com",
+        "senha": "senha654"
+    },
+    {
+        "id_user": 6,
+        "nome_usuario": "Juliana Pereira",
+        "email": "juliana.pereira@email.com",
+        "senha": "senha987"
+    },
+    {
+        "id_user": 7,
+        "nome_usuario": "Ricardo Alves",
+        "email": "ricardo.alves@email.com",
+        "senha": "senha111"
+    },
+    {
+        "id_user": 8,
+        "nome_usuario": "Patricia Martins",
+        "email": "patricia.martins@email.com",
+        "senha": "senha222"
+    },
+    {
+        "id_user": 9,
+        "nome_usuario": "Lucas Santos",
+        "email": "lucas.santos@email.com",
+        "senha": "senha333"
+    },
+    {
+        "id_user": 10,
+        "nome_usuario": "Gabriela Rocha",
+        "email": "gabriela.rocha@email.com",
+        "senha": "senha444"
+    },
+    {
+        "id_user": 13,
+        "nome_usuario": "Piuzinho",
+        "email": "Alanzinho@gmail.com",
+        "senha": "9090"
+    },
+    {
+        "id_user": 12,
+        "nome_usuario": "alanzoka",
+        "email": "Teste@gmail.com",
+        "senha": "2505"
+    },
+    {
+        "id_user": 15,
+        "nome_usuario": "supinpa",
+        "email": "teste1@gmail.com",
+        "senha": "senha123"
+    },
+    {
+        "id_user": 14,
+        "nome_usuario": "O Megatron",
+        "email": "megatron.grey@email.com",
+        "senha": "motherboard469"
+    },
+    {
+        "id_user": 11,
+        "nome_usuario": "fFukurou",
+        "email": "onnanoko@gmail.com",
+        "senha": "vocedevecolocarokunomeupeito"
+    },
+    {
+        "id_relatorio": 1,
+        "consumo_mensal": 350.5,
+        "conta_luz": 120.75,
+        "area_desejada": 45,
+        "qtd_paineis": 15,
+        "potencia_total": 5.4,
+        "custo_instal": 25000.0,
+        "economia_mensal": 500.0,
+        "payback": 4.2,
+        "id_usu": 1,
+        "id_reg": 1
+    },
+    {
+        "id_relatorio": 2,
+        "consumo_mensal": 220.0,
+        "conta_luz": 1000.0,
+        "area_desejada": 70,
+        "qtd_paineis": 41,
+        "potencia_total": 13.53,
+        "custo_instal": 71032.5,
+        "economia_mensal": 5750.25,
+        "payback": 12.35,
+        "id_usu": 2,
+        "id_reg": 5
+    },
+    {
+        "id_relatorio": 3,
+        "consumo_mensal": 620.0,
+        "conta_luz": 250.0,
+        "area_desejada": 75,
+        "qtd_paineis": 20,
+        "potencia_total": 6.5,
+        "custo_instal": 30000.0,
+        "economia_mensal": 900.0,
+        "payback": 3.0,
+        "id_usu": 3,
+        "id_reg": 3
+    },
+    {
+        "id_relatorio": 4,
+        "consumo_mensal": 280.75,
+        "conta_luz": 100.3,
+        "area_desejada": 40,
+        "qtd_paineis": 12,
+        "potencia_total": 4.8,
+        "custo_instal": 22000.0,
+        "economia_mensal": 450.0,
+        "payback": 4.8,
+        "id_usu": 4,
+        "id_reg": 4
+    },
+    {
+        "id_relatorio": 5,
+        "consumo_mensal": 460.0,
+        "conta_luz": 190.0,
+        "area_desejada": 65,
+        "qtd_paineis": 17,
+        "potencia_total": 5.9,
+        "custo_instal": 27000.0,
+        "economia_mensal": 700.0,
+        "payback": 3.7,
+        "id_usu": 5,
+        "id_reg": 2
+    },
+    {
+        "id_relatorio": 6,
+        "consumo_mensal": 540.0,
+        "conta_luz": 220.0,
+        "area_desejada": 70,
+        "qtd_paineis": 19,
+        "potencia_total": 6.3,
+        "custo_instal": 29000.0,
+        "economia_mensal": 800.0,
+        "payback": 3.3,
+        "id_usu": 6,
+        "id_reg": 3
+    },
+    {
+        "id_relatorio": 7,
+        "consumo_mensal": 380.25,
+        "conta_luz": 140.5,
+        "area_desejada": 50,
+        "qtd_paineis": 14,
+        "potencia_total": 5.0,
+        "custo_instal": 24000.0,
+        "economia_mensal": 600.0,
+        "payback": 4.5,
+        "id_usu": 7,
+        "id_reg": 1
+    },
+    {
+        "id_relatorio": 8,
+        "consumo_mensal": 400.75,
+        "conta_luz": 150.0,
+        "area_desejada": 55,
+        "qtd_paineis": 16,
+        "potencia_total": 5.2,
+        "custo_instal": 26000.0,
+        "economia_mensal": 650.0,
+        "payback": 4.0,
+        "id_usu": 8,
+        "id_reg": 2
+    },
+    {
+        "id_relatorio": 9,
+        "consumo_mensal": 650.5,
+        "conta_luz": 260.0,
+        "area_desejada": 80,
+        "qtd_paineis": 22,
+        "potencia_total": 6.8,
+        "custo_instal": 32000.0,
+        "economia_mensal": 950.0,
+        "payback": 2.9,
+        "id_usu": 9,
+        "id_reg": 3
+    },
+    {
+        "id_relatorio": 10,
+        "consumo_mensal": 310.0,
+        "conta_luz": 130.0,
+        "area_desejada": 42,
+        "qtd_paineis": 13,
+        "potencia_total": 5.1,
+        "custo_instal": 23000.0,
+        "economia_mensal": 530.0,
+        "payback": 4.3,
+        "id_usu": 10,
+        "id_reg": 5
+    },
+    {
+        "id_relatorio": 11,
+        "consumo_mensal": 375.0,
+        "conta_luz": 145.0,
+        "area_desejada": 48,
+        "qtd_paineis": 15,
+        "potencia_total": 5.3,
+        "custo_instal": 24500.0,
+        "economia_mensal": 620.0,
+        "payback": 4.4,
+        "id_usu": 10,
+        "id_reg": 1
+    },
+    {
+        "id_relatorio": 12,
+        "consumo_mensal": 510.0,
+        "conta_luz": 195.0,
+        "area_desejada": 62,
+        "qtd_paineis": 18,
+        "potencia_total": 5.7,
+        "custo_instal": 27500.0,
+        "economia_mensal": 750.0,
+        "payback": 3.6,
+        "id_usu": 9,
+        "id_reg": 2
+    },
+    {
+        "id_relatorio": 13,
+        "consumo_mensal": 640.0,
+        "conta_luz": 260.0,
+        "area_desejada": 78,
+        "qtd_paineis": 21,
+        "potencia_total": 6.6,
+        "custo_instal": 31000.0,
+        "economia_mensal": 900.0,
+        "payback": 3.1,
+        "id_usu": 8,
+        "id_reg": 3
+    },
+    {
+        "id_relatorio": 14,
+        "consumo_mensal": 320.0,
+        "conta_luz": 125.0,
+        "area_desejada": 43,
+        "qtd_paineis": 14,
+        "potencia_total": 5.0,
+        "custo_instal": 23000.0,
+        "economia_mensal": 550.0,
+        "payback": 4.6,
+        "id_usu": 7,
+        "id_reg": 4
+    },
+    {
+        "id_relatorio": 15,
+        "consumo_mensal": 475.0,
+        "conta_luz": 185.0,
+        "area_desejada": 63,
+        "qtd_paineis": 16,
+        "potencia_total": 5.5,
+        "custo_instal": 26500.0,
+        "economia_mensal": 700.0,
+        "payback": 3.8,
+        "id_usu": 6,
+        "id_reg": 5
+    },
+    {
+        "id_relatorio": 16,
+        "consumo_mensal": 530.0,
+        "conta_luz": 215.0,
+        "area_desejada": 68,
+        "qtd_paineis": 19,
+        "potencia_total": 6.2,
+        "custo_instal": 29000.0,
+        "economia_mensal": 800.0,
+        "payback": 3.2,
+        "id_usu": 5,
+        "id_reg": 1
+    },
+    {
+        "id_relatorio": 17,
+        "consumo_mensal": 410.0,
+        "conta_luz": 155.0,
+        "area_desejada": 56,
+        "qtd_paineis": 17,
+        "potencia_total": 5.3,
+        "custo_instal": 25500.0,
+        "economia_mensal": 650.0,
+        "payback": 4.1,
+        "id_usu": 4,
+        "id_reg": 2
+    },
+    {
+        "id_relatorio": 18,
+        "consumo_mensal": 470.0,
+        "conta_luz": 190.0,
+        "area_desejada": 64,
+        "qtd_paineis": 18,
+        "potencia_total": 5.8,
+        "custo_instal": 27000.0,
+        "economia_mensal": 700.0,
+        "payback": 3.7,
+        "id_usu": 3,
+        "id_reg": 3
+    },
+    {
+        "id_relatorio": 19,
+        "consumo_mensal": 595.0,
+        "conta_luz": 235.0,
+        "area_desejada": 72,
+        "qtd_paineis": 20,
+        "potencia_total": 6.4,
+        "custo_instal": 30000.0,
+        "economia_mensal": 850.0,
+        "payback": 3.0,
+        "id_usu": 2,
+        "id_reg": 4
+    },
+    {
+        "id_relatorio": 20,
+        "consumo_mensal": 666.0,
+        "conta_luz": 666.0,
+        "area_desejada": 666,
+        "qtd_paineis": 391,
+        "potencia_total": 129.0,
+        "custo_instal": 677250.0,
+        "economia_mensal": 54825.0,
+        "payback": 12.0,
+        "id_usu": 1,
+        "id_reg": 4
+    },
+    {
+        "id_relatorio": 21,
+        "consumo_mensal": 690.0,
+        "conta_luz": 200.0,
+        "area_desejada": 600,
+        "qtd_paineis": 352,
+        "potencia_total": 116.0,
+        "custo_instal": 609000.0,
+        "economia_mensal": 49300.0,
+        "payback": 12.0,
+        "id_usu": 12,
+        "id_reg": 4
+    }
+]
